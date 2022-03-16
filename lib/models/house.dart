@@ -57,7 +57,14 @@ class FetchHouse {
     // data .... sjajua kwako exactly ni zipi ila znatakiwa ziwe kama izo unazo
     // request kwenye screen pale .....
 
-    var body = {"number_of_rooms": number_of_rooms, "floor_area": floor_area};
+    //test na hizi parameters
+    var body = {
+      "number_of_rooms": 3,
+      "floor_area": 85.0,
+      "house_type": 2,
+      "latitude": -5.0888,
+      "longitude": 39.1023
+    };
 
     final response = await http.post(Uri.parse(url), body: json.encode(body));
 
