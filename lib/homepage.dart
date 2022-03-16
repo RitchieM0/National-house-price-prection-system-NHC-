@@ -8,8 +8,6 @@ import 'package:flutter/painting.dart';
 // ignore: unused_import
 import 'models/house.dart';
 
-// import 'package:homepricepredictor/widgets/state_panel.dart';
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Future<House> futureHouse;
   TextEditingController valid = TextEditingController();
+  FetchHouse fetchHouse = new FetchHouse();
 
   @override
   void initState() {
@@ -168,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onPressed: () {
-                MyApp();
+                fetchHouse.fetchHouse();
               },
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
