@@ -154,9 +154,8 @@ class _HomePageState extends State<HomePage> {
           ),
 
           // send request button
-          GestureDetector(
-            onTap: () {},
-            child: ElevatedButton(
+          
+            ElevatedButton(
               // ignore: sdk_version_set_literal
 
               child: Text(
@@ -176,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                     TextStyle(fontSize: 20),
                   )),
             ),
-          ),
+          
         ],
       ),
     );

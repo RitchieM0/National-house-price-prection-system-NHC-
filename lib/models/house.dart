@@ -55,7 +55,7 @@ class FetchHouse {
   
   Future fetchHouse() async {
     final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+        .post(Uri.parse('http://127.0.0.1:8000/predict'));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -70,7 +70,7 @@ class FetchHouse {
 
   Future fetchHouses() async {
     var response = await http
-        .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
+        .post(Uri.encodeFull(url), headers: {"Accept": "application/json"});
 
     print(response.body);
 
