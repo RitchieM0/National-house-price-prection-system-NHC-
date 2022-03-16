@@ -165,9 +165,17 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+<<<<<<< Updated upstream
               onPressed: () {
                 fetchHouse.fetchHouse();
                },
+=======
+              onPressed: () async{
+                 setState(() {
+                              
+                            });
+              },
+>>>>>>> Stashed changes
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                   padding: MaterialStateProperty.all(EdgeInsets.all(10)),

@@ -79,7 +79,7 @@ children: [
       appBar: AppBar(
           title: new Text('NATIONAL HOUSE'),
         ),
-        body:  HomePage(),
+        body:HomePage(),
         ),
       
     );
