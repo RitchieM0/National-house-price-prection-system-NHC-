@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () {
                 fetchHouse.fetchHouse();
-              },
+               },
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                   padding: MaterialStateProperty.all(EdgeInsets.all(10)),
