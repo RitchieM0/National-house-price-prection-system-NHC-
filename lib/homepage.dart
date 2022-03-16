@@ -14,8 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Future<House> futureHouse;
+  // Nmeadd hizi kwa ajili yakuchukua parameters kwenye screen pale
   TextEditingController valid = TextEditingController();
+  TextEditingController number_of_rooms = TextEditingController();
+  TextEditingController floor_area = TextEditingController();
+  TextEditingController size = TextEditingController();
+  TextEditingController house_type = TextEditingController();
+  TextEditingController location = TextEditingController();
+
   FetchHouse fetchHouse = new FetchHouse();
 
   @override
@@ -25,6 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   bool value = false;
   int val = -1;
+
   @override
   Widget build(BuildContext context) {
     final inputs = Padding(
@@ -35,6 +42,8 @@ class _HomePageState extends State<HomePage> {
             height: 25,
           ),
           TextFormField(
+            controller: location,
+            onChanged: (value) => location.text = value,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(15),
               labelText: "Location",
@@ -52,7 +61,8 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(top: 15, bottom: 15),
             child: TextFormField(
-              controller: valid,
+              controller: number_of_rooms,
+              onChanged: (value) => number_of_rooms.text = value,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15),
@@ -75,6 +85,8 @@ class _HomePageState extends State<HomePage> {
           ),
           TextFormField(
             keyboardType: TextInputType.number,
+            controller: floor_area,
+            onChanged: (value) => floor_area.text = value,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(15),
               labelText: "Area",
@@ -93,6 +105,8 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(top: 15, bottom: 15),
             child: TextFormField(
               keyboardType: TextInputType.number,
+              controller: size,
+              onChanged: (value) => size.text = value,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(10),
                 labelText: "Metric",
@@ -158,7 +172,6 @@ class _HomePageState extends State<HomePage> {
             onTap: () {},
             child: ElevatedButton(
               // ignore: sdk_version_set_literal
-
               child: Text(
                 "send request",
                 style: TextStyle(
@@ -167,7 +180,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onPressed: () {
-                fetchHouse.fetchHouse();
+                //hapa nazipass kwenda kwenye iyo function inayo call api
+                fetchHouse.fetchHouse(number_of_rooms.text, floor_area.text,
+                    size.text, location.text);
               },
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.blue),

@@ -52,9 +52,14 @@ class FetchHouse {
   Map mapResponse;
   List listOfHouse;
 
-  Future<House> fetchHouse() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+  Future<House> fetchHouse(number_of_rooms, floor_area, size, location) async {
+    //bro hapa ni izo parameters ambazo znatakiwa zipass kwenye api ili ilete
+    // data .... sjajua kwako exactly ni zipi ila znatakiwa ziwe kama izo unazo
+    // request kwenye screen pale .....
+
+    var body = {"number_of_rooms": number_of_rooms, "floor_area": floor_area};
+
+    final response = await http.post(Uri.parse(url), body: json.encode(body));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
