@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "978922277456",
+    "project_id": "nhc-price-prediction-system",
+    "storage_bucket": "nhc-price-prediction-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978922277456:android:b48deccdaad74d941c1f55",
+        "android_client_info": {
+          "package_name": "com.example.fyp_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978922277456-4315i8d99ldmo2n1600j8mo0j7rtk9ge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfOatvP-qQCHKTWQFmpcTc9zeGw5ajvmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978922277456-4315i8d99ldmo2n1600j8mo0j7rtk9ge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
