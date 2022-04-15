@@ -1,8 +1,11 @@
 // ignore: unused_import
+// ignore_for_file: missing_return
+
 import 'dart:convert';
 import 'dart:async';
 
 // import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: unused_import
@@ -17,13 +20,13 @@ class House {
   String price;
 
   House(
-    this.price, {
+    this.price, 
     this.number_of_rooms,
     this.floor_area,
     this.house_Type,
     this.latitude,
     this.longitude,
-  });
+  );
 
   fromJson(Map<String, dynamic> json) {
     number_of_rooms = json['number_of_rooms'];
@@ -35,27 +38,57 @@ class House {
   }
 }
 
-// void main() => runApp(MyApp());
-//
-// class MyApp extends StatefulWidget {
-//   MyApp({Key key}) : super(key: key);
-//
-//   @override
-//   _MyAppState createState() => _MyAppState();
-// }
+void main() => runApp(MyApp());
 
-class FetchHouse {
-  // Future<House> futureHouse;
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+ class _MyAppState extends State<MyApp> {
+  Future<House> futureHouse;
   final String url = "http://127.0.0.1:8000/predict";
   String stringResponse;
   List listResponse;
   Map mapResponse;
-  List listOfHouse;
 
-  
-  Future fetchHouse() async {
-    final response = await http
-        .post(Uri.parse('http://127.0.0.1:8000/predict'));
+  var house_Type;
+
+  get number_of_rooms => number_of_rooms;
+
+  get floor_area => floor_area;
+
+  get location => location;
+
+  get size => size;
+
+
+  @override
+  void initState() {
+    fetchHouse(number_of_rooms, floor_area, size, location, house_Type);
+    super.initState();
+  }
+
+
+
+
+
+
+
+  Future<House> fetchHouse(number_of_rooms, floor_area, size, location, house_Type) async {
+    //bro hapa ni izo parameters ambazo znatakiwa zipass kwenye api ili ilete
+    // data .... sjajua kwako exactly ni zipi ila znatakiwa ziwe kama izo unazo
+    // request kwenye screen pale .....
+
+    var body = {"number_of_rooms": 3,
+    "floor_area" : 85.0,
+    "house_type": 2,
+    "latitude" : -5.0888,
+    "longitude" : 39.1023};
+
+    final response = await http.post(Uri.parse(url), body: json.encode(body));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -85,6 +118,12 @@ class FetchHouse {
       // then throw an exception.
       throw Exception('Failed to load House ');
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    
+    throw UnimplementedError();
   }
 }
 
