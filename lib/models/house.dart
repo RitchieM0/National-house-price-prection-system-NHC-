@@ -84,11 +84,11 @@ class MyApp extends StatefulWidget {
 
     //test na hizi parameters
     var body = {
-      "number_of_rooms": 3,
-      "floor_area": 85.0,
-      "house_type": 2,
-      "latitude": -5.0888,
-      "longitude": 39.1023
+      "number_of_rooms": ,
+      "floor_area": ,
+      "house_type": ,
+      "latitude": ,
+      "longitude": 
     };
 
     final response = await http.post(Uri.parse(url), body: json.encode(body));
@@ -220,3 +220,4 @@ class MyApp extends StatefulWidget {
 //     );
 //   }
 // }
+// gha
