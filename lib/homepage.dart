@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onPressed: () {
-                //hapa nazipass kwenda kwenye iyo function inayo call api
+                //hapa nazipass kwenda kwenye iyo function inayo call apii
                 fetchHouse.fetchHouse(number_of_rooms.text, floor_area.text,
                     size.text, location.text, house_type.text);
               },
