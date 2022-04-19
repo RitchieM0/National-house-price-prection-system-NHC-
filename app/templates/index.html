@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <!--  -->
+    <div class="p-5 m-5">
+        <h1>Machine learning model</h1> <hr>
+        <p class="">Welcome to the machine learning model</p>
+        <p>Send your Json file for prediction in the route <strong>/predict</strong> </p>
+
+    </div>
+
+
+    <div class="pl-5 pr-5 ml-5 mr-5">
+        <h1>Json format to send</h1>
+        <p>
+            <pre>
+{
+    "number_of_rooms": 3,
+    "floor_area" : 85.0,
+    "house_type":1,
+    "latitude" :-5.0888,
+    "longitude" :39.1023
+}
+
+            </pre>
+
+        </p>
+    </div>
+
+    <!-- receive -->
+    <div class="pl-5 pr-5 ml-5 mr-5">
+        <h1>Json format to receive</h1>
+        <p>
+            <pre>
+{
+    "price": 832814834
+}
+
+            </pre>
+
+        </p>
+    </div>
+
+
+</div>
+
+{% endblock %}
