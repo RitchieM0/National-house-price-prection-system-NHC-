@@ -3,12 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:homepricepredictor/widgets/map_routes.dart';
+import 'package:provider/src/provider.dart';
+//import 'package:provider/src/provider.dart';
 // import 'package:homepricepredictor/widgets/map_routes.dart';
 // import 'package:homepricepredictor/widgets/map_routes.dart';
 // import 'dart:convert';
 
 // import 'package:http/http.dart' as http;
 // ignore: unused_import
+import 'authentication/authentication_services.dart';
 import 'models/house.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,10 +41,21 @@ class _HomePageState extends State<HomePage> {
             height: 25,
           ),
           TextFormField(
+          
+              validator: (locationSqft) {
+                        if (locationSqft.isEmpty) {
+                          return "VALUE CANNOT BE EMPTY";
+                        }
+                  
+                        return null;
+                      },
             decoration: InputDecoration(
+          
               contentPadding: EdgeInsets.all(15),
+             
               labelText: "Location",
               labelStyle: TextStyle(color: Colors.white),
+              
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: BorderSide(
@@ -57,6 +71,18 @@ class _HomePageState extends State<HomePage> {
             child: TextFormField(
               controller: valid,
               keyboardType: TextInputType.number,
+               validator: (roomNum) {
+                        if (roomNum.isEmpty) {
+                          return "VALUE CANNOT BE EMPTY";
+                        }
+                        if (roomNum.contains(".")) {
+                          return "NUMBER OF ROOM CANNOT BE IN DECIMAL";
+                        }
+                        if (int.parse(roomNum) < 0 || int.parse(roomNum) > 5) {
+                          return "NO. OF ROOM CANNOT BE LESS THAN 0 OR GREATER THAN 5";
+                        }
+                        return null;
+                      },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15),
                 labelText: "Number of rooms",
@@ -96,6 +122,13 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(top: 15, bottom: 15),
             child: TextFormField(
               keyboardType: TextInputType.number,
+               validator: (totalSqft) {
+                        if (totalSqft.isEmpty) {
+                          return "VALUE CANNOT BE EMPTY";
+                        }
+                  
+                        return null;
+                      },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(10),
                 labelText: "Metric",
@@ -119,6 +152,7 @@ class _HomePageState extends State<HomePage> {
             'HOUSE TYPE',
             textAlign: TextAlign.left,
             style: TextStyle(
+              
               color: Color.fromRGBO(25, 0, 0, 1),
               fontWeight: FontWeight.bold,
             ),
@@ -169,9 +203,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder.(context)=> MapPage()),);
+              
+              FetchHouse();
+              //navigate to the map page
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => FlutterAnimarkerExample()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FlutterAnimarkerExample()));
             },
 
             style: ButtonStyle(
@@ -186,6 +224,56 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
+       drawer: Drawer(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  
+                  child: Image.asset('assets/nhc2.png',
+                   width: 110.0,
+                  height: 120.0, fit: BoxFit.cover),
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      // Text('For more inquiries consider the contacts below'),
+                      ListTile(
+                        leading: Icon(Icons.phone_android),
+                        title: Text("PHONE: 0621235166"),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('person information'),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.mark_email_read_rounded),
+                        title: Text('EMAIL: nhcpriceprediction@gmail.com'),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.maps_home_work_sharp),
+                        title: Text('14113 kijitonyama Dar es salaam Tanzania'),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.add_comment_rounded),
+                        title: Text('About-us'),
+                      ),
+                      ListTile(
+                          leading: Icon(Icons.logout),
+                          title: Text('Logout'),
+                          onTap: () {
+                            context.read<AuthenticationService>().signOut();
+                          },
+                          ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
         child: Padding(
@@ -194,7 +282,8 @@ class _HomePageState extends State<HomePage> {
             shape: RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.vertical(bottom: Radius.circular(20))),
-            backgroundColor: Colors.yellowAccent[400],
+            backgroundColor: Colors.blueAccent[100],
+
             title: Text(
               "⭐Welcome, send your request now!!⭐",
               textAlign: TextAlign.center,
@@ -221,8 +310,8 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.lightBlue[100],
-                              offset: Offset(3.5, 5.5),
+                              color: Colors.greenAccent[100],
+                              offset: Offset(4.5, 5.5),
                               spreadRadius: 1,
                               blurRadius: 5)
                         ]),

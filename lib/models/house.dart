@@ -160,8 +160,7 @@ Future<void> getPrice() async {
       "house_Type": houseTypeController.text
     };
     print(data);
-    // var response = await http.post("http://192.168.0.102:5000/predict_home_price_Bangalore" , body : jsonEncode(data));
-    // print(response.body);
+
     var dio = Dio();
     try {
       FormData formData = new FormData.fromMap(data);

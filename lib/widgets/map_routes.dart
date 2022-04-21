@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:homepricepredictor/widgets/formWidget.dart';
 
 class FlutterAnimarkerExample extends StatefulWidget {
   @override
@@ -39,18 +40,18 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
   LatLng pinPosition27 = LatLng(-3.239300, 36.762700);
   LatLng pinPosition29 = LatLng(-6.181100, 35.763800);
   LatLng pinPosition30 = LatLng(-6.864000, 39.388000);
-  LatLng pinPosition31 = LatLng(-6.797800, 39.262100);
+  LatLng pinPosition31 = LatLng(-6.7962044762950224, 39.26934461265225);
   LatLng pinPosition32 = LatLng(-6.792500, 39.208700);
   LatLng pinPosition33 = LatLng(-6.808087, 39.276505);
   LatLng pinPosition34 = LatLng(-6.820800, 39.263300);
   LatLng pinPosition35 = LatLng(-6.779000, 39.253400);
-  LatLng pinPosition36 = LatLng(-6.776012, 39.178326);
-  LatLng pinPosition37 = LatLng(-6.723100, 39.229900);
-  LatLng pinPosition38 = LatLng(-6.200800, 35.836900);
+  LatLng pinPosition36 = LatLng(-6.7730453754668885, 39.26162792703885);
+  LatLng pinPosition37 = LatLng(-6.73815621476203, 39.23688586872349);
+  LatLng pinPosition38 = LatLng(-6.2056925754351475, 35.83576749936743);
   LatLng pinPosition39 = LatLng(-10.281000, 40.180200);
-  LatLng pinPosition40 = LatLng(-6.783330, 39.283330);
+  LatLng pinPosition40 = LatLng(-6.773297375477286, 39.260999754298986);
 
-  final double _zoom = 15.0;
+  final double _zoom = 11.5;
   BitmapDescriptor pinPositionIcon;
   Set<Marker> _markers = Set();
 
@@ -67,15 +68,22 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(
+                title: "NATIONAL HOUSE HQ",
+                snippet: "WELCOME predict your Home!!"),
+                    
             position: pinPosition),
       );
     });
     setState(() {
       _markers.add(
         Marker(
-            markerId: MarkerId("marker_id1"),
-            icon: pinPositionIcon,
-            position: pinPosition1),
+          markerId: MarkerId("marker_id1"),
+          icon: pinPositionIcon,
+          infoWindow: InfoWindow(title: "Location: Kongwa", snippet: "price: $price"),
+        
+          position: pinPosition1,
+        ),
       );
     });
     setState(() {
@@ -83,6 +91,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id2"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition2),
       );
     });
@@ -91,6 +100,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id3"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition3),
       );
     });
@@ -99,6 +109,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id4"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition4),
       );
     });
@@ -107,6 +118,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id11"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition11),
       );
     });
@@ -115,6 +127,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id5"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition5),
       );
     });
@@ -123,6 +136,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id6"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition6),
       );
     });
@@ -131,6 +145,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id7"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition7),
       );
     });
@@ -139,6 +154,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id8"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition8),
       );
     });
@@ -147,6 +163,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id9"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition9),
       );
     });
@@ -155,6 +172,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id10"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition10),
       );
     });
@@ -163,6 +181,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id12"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition12),
       );
     });
@@ -171,6 +190,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id13"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition13),
       );
     });
@@ -179,6 +199,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id14"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition14),
       );
     });
@@ -187,6 +208,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id15"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition15),
       );
     });
@@ -195,6 +217,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id16"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition16),
       );
     });
@@ -203,6 +226,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id17"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition17),
       );
     });
@@ -211,6 +235,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id18"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition18),
       );
     });
@@ -219,6 +244,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id19"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition19),
       );
     });
@@ -227,6 +253,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id20"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition20),
       );
     });
@@ -235,6 +262,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id21"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition21),
       );
     });
@@ -243,6 +271,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id22"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition22),
       );
     });
@@ -251,6 +280,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id23"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition23),
       );
     });
@@ -259,6 +289,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id24"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition24),
       );
     });
@@ -267,6 +298,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id25"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition25),
       );
     });
@@ -275,6 +307,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id26"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition26),
       );
     });
@@ -283,6 +316,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id27"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition27),
       );
     });
@@ -291,6 +325,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id28"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition28),
       );
     });
@@ -299,6 +334,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id29"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition29),
       );
     });
@@ -307,6 +343,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id30"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition30),
       );
     });
@@ -315,6 +352,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id31"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "Location: KINONDONI", snippet: ""),
             position: pinPosition31),
       );
     });
@@ -323,6 +361,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id32"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition32),
       );
     });
@@ -331,6 +370,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id33"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition33),
       );
     });
@@ -339,6 +379,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id34"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "", snippet: ""),
             position: pinPosition34),
       );
     });
@@ -347,6 +388,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id35"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "Location: VICTORIA PLACE", snippet: ""),
             position: pinPosition35),
       );
     });
@@ -355,6 +397,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id36"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "location: MOROCCO SQUARE", snippet: ""),
             position: pinPosition36),
       );
     });
@@ -363,6 +406,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id37"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "Location: KAWE", snippet: ""),
             position: pinPosition37),
       );
     });
@@ -371,6 +415,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id38"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "Location: DODOMA-IYUMBU", snippet: ""),
             position: pinPosition38),
       );
     });
@@ -379,6 +424,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id39"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "Location: MTWARA-Raha Leo", snippet: ""),
             position: pinPosition39),
       );
     });
@@ -387,6 +433,7 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         Marker(
             markerId: MarkerId("marker_id40"),
             icon: pinPositionIcon,
+            infoWindow: InfoWindow(title: "Location: CHATO", snippet: ""),
             position: pinPosition40),
       );
     });
@@ -405,6 +452,10 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
         compassEnabled: true,
         onMapCreated: (GoogleMapController controller) {
           _addMarkers();
+          var _mapController;
+          _mapController.onMarkerTapped.add((marker) {
+            // your code here
+          });
         },
         markers: _markers,
         initialCameraPosition: CameraPosition(
@@ -414,4 +465,6 @@ class _FlutterAnimarkerExampleState extends State<FlutterAnimarkerExample> {
       ),
     );
   }
+
+  
 }

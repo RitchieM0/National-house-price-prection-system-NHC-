@@ -37,6 +37,12 @@ dependencies:
   flutter_polyline_points: 
 
   provider: ^6.0.2
+  firebase_auth: ^0.20.1
+  firebase_core: ^0.7.0
+  flutter_image_slideshow: ^0.1.2
+  carousel_pro: ^1.0.0
+  animated_text_kit: ^4.2.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -63,8 +69,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/nhc2.png
-    - assets/meme.gif
+    - assets/slide1.png
     - assets/hous.png
+    - assets/slider2.jpg
+    - assets/slider3.jpg
+    - assets/slider4.jpg
+    - assets/slide5.png
+
   
   #  - images/a_dot_ham.jpeg
 
