@@ -3,6 +3,7 @@
    <application
         android:label="fyp_project"
         android:icon="@mipmap/ic_launcher">
+
    <!-- <uses-permission android:name="android.permission.INTERNET"/> -->
     <!-- <uses-permission android:name="andrioid.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="andrioid.permission.ACCESS_COARSE_LOCATION"/> --> -->

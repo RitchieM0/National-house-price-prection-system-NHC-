@@ -7,6 +7,7 @@ import 'package:homepricepredictor/homepage.dart';
 import 'package:homepricepredictor/pages/front_page.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
+// import 'package:geolocator/geolocator.dart';
 
 // import 'authentication/login.dart';
 
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             title: new Text('NATIONAL HOUSE APP'),
           ),
           body: AuthenticationWrapper(),
+          // body: HomePage(),
           
       ),
      ), );
