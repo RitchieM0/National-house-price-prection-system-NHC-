@@ -40,15 +40,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
         home: Scaffold(
-          
           appBar: AppBar(
             title: new Text('NATIONAL HOUSE APP'),
           ),
           body: AuthenticationWrapper(),
           // body: HomePage(),
-          
+        ),
       ),
-     ), );
+    );
   }
 }
 

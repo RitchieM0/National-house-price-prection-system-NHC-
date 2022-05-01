@@ -48,10 +48,8 @@ class MyApp extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    
     throw UnimplementedError();
   }
-
 }
 
 class FetchHouse {
@@ -62,15 +60,11 @@ class FetchHouse {
   Map locationDataResponse;
   Map priceResponse;
   List listOfHouse;
-  fetchlocationHouse() async {
-    
-   
-  }
+  fetchlocationHouse() async {}
 
   @override
   void initState() {
     fetchlocationHouse();
-   
   }
 
   @override
@@ -80,10 +74,8 @@ class FetchHouse {
     locationController.clear();
     tshController.clear();
     priceContainer = false;
-   
   }
 
- 
   Future fetchHouse() async {
     var response = await http
         .post(Uri.encodeFull(url), headers: {"Accept": "application/json"});
@@ -141,10 +133,7 @@ class FetchHouse {
                       itemCount: listOfHouse == null ? 1 : listOfHouse.length,
                     )
                   ],
-                )
-
-          
-          ),
+                )),
     );
   }
 }
