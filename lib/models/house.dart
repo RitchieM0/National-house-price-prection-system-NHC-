@@ -54,7 +54,7 @@ class MyApp extends StatefulWidget {
 
 class FetchHouse {
   // Future<House> futureHouse;
-  final String url = "http://127.0.0.1:8000/predict";
+  final String url = "https://nhcapi.herokuapp.com/predict";
   String location;
   List listResponse;
   Map locationDataResponse;
@@ -154,7 +154,7 @@ Future<void> getPrice() async {
     try {
       FormData formData = new FormData.fromMap(data);
       var responsePrice =
-          await dio.post("http://127.0.0.1:8000/predict", data: formData);
+          await dio.post("https://nhcapi.herokuapp.com/predict", data: formData);
       print(responsePrice.data);
       price = responsePrice.data;
     } catch (error) {
@@ -174,3 +174,29 @@ final tshController = TextEditingController();
 final houseTypeController = TextEditingController();
 final formKey = GlobalKey<FormState>();
 String selectedCity = "";
+
+
+// Future<> getHousePrice() async {
+
+//     var url = "https://nhcapi.herokuapp.com/predict";
+    
+//     var body = {
+//       "number_of_rooms": 2,
+//       "floor_area": 56,
+//       "house_type": 1,
+//       "latitude": -10.658900,
+//       "longitude": 35.646000
+//     };
+
+//     final response = await http.post(url, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8' }, 
+//             body: json.encode(body));
+
+//     if (response.statusCode == 200) {
+//       print('response: ' + response.body);
+      
+//       return HousePrice.fromJson(json.decode(response.body));
+//     } else {
+//       print('failed to get data');
+//       throw Exception('Failed to get data');
+//     }
+//   }
