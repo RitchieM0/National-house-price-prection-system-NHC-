@@ -1,3 +1,10 @@
+class Constant{
+
+  static String googleeApiKey = "AIzaSyDRBpXgo5EQ0t0gVNC6NgftgBNcgALyaHw";
+}
+
+
+
 List<String> bathroom = [
   "1",
   "2",

@@ -3,6 +3,7 @@
 
 import 'dart:collection';
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
@@ -60,6 +61,7 @@ class FetchHouse {
   Map locationDataResponse;
   Map priceResponse;
   List listOfHouse;
+
   fetchlocationHouse() async {}
 
   @override
@@ -74,25 +76,6 @@ class FetchHouse {
     locationController.clear();
     tshController.clear();
     priceContainer = false;
-  }
-
-  Future fetchHouse() async {
-    var response = await http
-        .post(Uri.encodeFull(url), headers: {"Accept": "application/json"});
-
-    print(response.body);
-
-    // ignore: unused_element
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load House ');
-    }
   }
 
   @override
@@ -136,9 +119,32 @@ class FetchHouse {
                 )),
     );
   }
+
+  Future<String> getHousePrice() async {
+    var url = "https://nhcapi.herokuapp.com/predict";
+
+    var body = {
+      "number_of_rooms": 2,
+      "floor_area": 56,
+      "house_type": 1,
+      "latitude": -10.658900,
+      "longitude": 35.646000
+    };
+
+    final response = await http.post(url,
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: json.encode(body));
+
+    if (response.statusCode == 200) {
+      print('response: ' + response.body);
+      return json.decode(response.body).toString();
+    } else {
+      return 'Error';
+    }
+  }
 }
 
-Future<void> getPrice() async {
+Future<void> geHousetPrice() async {
   if (formKey.currentState.validate() && locationController.text.isNotEmpty) {
     print("Correct");
     Map<String, String> data = {
@@ -153,8 +159,8 @@ Future<void> getPrice() async {
     var dio = Dio();
     try {
       FormData formData = new FormData.fromMap(data);
-      var responsePrice =
-          await dio.post("https://nhcapi.herokuapp.com/predict", data: formData);
+      var responsePrice = await dio.post("https://nhcapi.herokuapp.com/predict",
+          data: formData);
       print(responsePrice.data);
       price = responsePrice.data;
     } catch (error) {
@@ -174,29 +180,3 @@ final tshController = TextEditingController();
 final houseTypeController = TextEditingController();
 final formKey = GlobalKey<FormState>();
 String selectedCity = "";
-
-
-// Future<> getHousePrice() async {
-
-//     var url = "https://nhcapi.herokuapp.com/predict";
-    
-//     var body = {
-//       "number_of_rooms": 2,
-//       "floor_area": 56,
-//       "house_type": 1,
-//       "latitude": -10.658900,
-//       "longitude": 35.646000
-//     };
-
-//     final response = await http.post(url, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8' }, 
-//             body: json.encode(body));
-
-//     if (response.statusCode == 200) {
-//       print('response: ' + response.body);
-      
-//       return HousePrice.fromJson(json.decode(response.body));
-//     } else {
-//       print('failed to get data');
-//       throw Exception('Failed to get data');
-//     }
-//   }

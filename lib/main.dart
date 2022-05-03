@@ -6,16 +6,7 @@ import 'package:homepricepredictor/authentication/authentication_services.dart';
 import 'package:homepricepredictor/homepage.dart';
 import 'package:homepricepredictor/pages/front_page.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/src/provider.dart';
-// import 'package:geolocator/geolocator.dart';
 
-// import 'authentication/login.dart';
-
-// import 'package:homepricepredictor/widgets/map_routes.dart';
-
-// import 'widgets/menuWidget.dart';
-
-// import 'package:homepricepredictor/widgets/form.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

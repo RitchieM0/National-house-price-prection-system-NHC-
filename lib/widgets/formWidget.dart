@@ -1,7 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
@@ -61,17 +60,28 @@ class _FormwidgetState extends State<Formwidget> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: DropDownField(
-                      controller: locationController,
-                      hintText: "Select Location",
-                      enabled: true,
-                      itemsVisibleInDropdown: 5,
-                      items: locationDataBangalore["locations"].cast<String>(),
-                      onValueChanged: (value) {
+                    // child: DropDownField(
+                    //   controller: locationController,
+                    //   hintText: "Select Location",
+                    //   enabled: true,
+                    //   itemsVisibleInDropdown: 5,
+                    //   items: locationDataBangalore["locations"].cast<String>(),
+                    //   onValueChanged: (value) {
+                    //     setState(() {
+                    //       selectedCity = value;
+                    //     });
+                    //   },
+                    // ),
+                    child: DropdownButton(
+                      value: selectedCity,
+                      hint: Text("Select Location"),
+                      items: locationDataBangalore["location"].cast<String>(),
+                      onChanged: (String value){
                         setState(() {
                           selectedCity = value;
                         });
                       },
+                      
                     ),
                   ),
                   Padding(

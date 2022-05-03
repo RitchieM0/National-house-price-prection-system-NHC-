@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homepricepredictor/authentication/login.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-
 class MySlider extends StatefulWidget {
   @override
   _MySliderState createState() => _MySliderState();
@@ -39,10 +38,8 @@ class _MySliderState extends State<MySlider> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 child: Text(
                   "Login",
@@ -57,44 +54,41 @@ class _MySliderState extends State<MySlider> {
               SizedBox(
                 height: 150,
               ),
-            //Text Animation
+              //Text Animation
               Container(
                 child: AnimatedTextKit(
                   animatedTexts: [
-                    RotateAnimatedText('WELCOME NHC',
-                    textStyle: GoogleFonts.acme(
-                                textStyle: TextStyle(
-                                    color: Colors.blue[200],
-                                       fontSize: 30,
-                                    letterSpacing: 1.0),
-                              ),
-           
-                            
-                            ),
-                    RotateAnimatedText('PREDICT YOUR HOME',
-                        textStyle: GoogleFonts.acme(
-                                textStyle: TextStyle(
-                                    color: Colors.orangeAccent,
-                                       fontSize: 30,
-                                    letterSpacing: 3.0),
-                              ),
-                    
-                            
-                            ),
-                           ///aa 
-                            
+                    RotateAnimatedText(
+                      'WELCOME NHC',
+                      textStyle: GoogleFonts.acme(
+                        textStyle: TextStyle(
+                            color: Colors.blue[200],
+                            fontSize: 30,
+                            letterSpacing: 1.0),
+                      ),
+                    ),
+                    RotateAnimatedText(
+                      'PREDICT YOUR HOME',
+                      textStyle: GoogleFonts.acme(
+                        textStyle: TextStyle(
+                            color: Colors.orangeAccent,
+                            fontSize: 30,
+                            letterSpacing: 3.0),
+                      ),
+                    ),
+
+                    ///aa
+
                     RotateAnimatedText(
                       'NYUMBANI KUMENOGA!',
-                     textStyle: GoogleFonts.acme(
-                                textStyle: TextStyle(
-                                    color: Colors.blue[200],
-                                       fontSize: 30,
-                                       decoration: TextDecoration.underline,
-                                    letterSpacing: 2.0),
-                                   
-                              ),
-                       
-                            ),
+                      textStyle: GoogleFonts.acme(
+                        textStyle: TextStyle(
+                            color: Colors.blue[200],
+                            fontSize: 30,
+                            decoration: TextDecoration.underline,
+                            letterSpacing: 2.0),
+                      ),
+                    ),
                   ],
                   isRepeatingAnimation: true,
                   totalRepeatCount: 10,

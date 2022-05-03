@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homepricepredictor/Utils/common.dart';
 import 'package:homepricepredictor/authentication/signup.dart';
+import 'package:homepricepredictor/homepage.dart';
 
 import 'package:provider/provider.dart';
 import 'authentication_services.dart';
@@ -15,17 +17,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool _secureText = true;
 
-  
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -115,7 +113,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -131,10 +128,23 @@ class _LoginPageState extends State<LoginPage> {
                         minWidth: 150,
                         height: 40,
                         onPressed: () {
-                          context.read<AuthenticationService>().signIn(
+                          context
+                              .read<AuthenticationService>()
+                              .signIn(
                                 email: emailController.text.trim(),
                                 password: passwordController.text.trim(),
+                              )
+                              .then((String message) {
+                            Common().showToast(context, message);
+
+                            if (message == 'Signed In') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()),
                               );
+                            }
+                          });
                         },
                         color: Color.fromARGB(255, 29, 80, 189),
                         // elevation: 0,
@@ -157,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => SignupPage()),
                         );
@@ -184,12 +194,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  
 }
-
-
-
 
 // we will be creating a widget for text field
 Widget inputFile({label, obscureText = false}) {

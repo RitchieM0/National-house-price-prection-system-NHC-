@@ -1,18 +1,14 @@
-// import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+import 'package:homepricepredictor/Utils/common.dart';
+import 'package:homepricepredictor/Utils/constants.dart';
+import 'package:homepricepredictor/services/google_places.dart';
+import 'package:homepricepredictor/widgets/locationsearch.dart';
 import 'package:homepricepredictor/widgets/map_routes.dart';
 import 'package:provider/src/provider.dart';
-//import 'package:provider/src/provider.dart';
-// import 'package:homepricepredictor/widgets/map_routes.dart';
-// import 'package:homepricepredictor/widgets/map_routes.dart';
-// import 'dart:convert';
-
-// import 'package:http/http.dart' as http;
-// ignore: unused_import
+import 'package:uuid/uuid.dart';
 import 'authentication/authentication_services.dart';
 import 'models/house.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,17 +16,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Future<House> futureHouse;
   TextEditingController valid = TextEditingController();
-  FetchHouse fetchHouse = new FetchHouse();
+  final _locationController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _locationController.dispose();
+    super.dispose();
+  }
+
   bool value = false;
   int val = -1;
+
   @override
   Widget build(BuildContext context) {
     final inputs = Padding(
@@ -41,6 +43,20 @@ class _HomePageState extends State<HomePage> {
             height: 25,
           ),
           TextFormField(
+            controller: _locationController,
+            onTap: () async {
+              final sessionToken = Uuid().v4();
+              final Suggestion result = await showSearch(
+                context: context,
+                delegate: LocationSearch(sessionToken),
+              );
+
+              if (result != null) {
+                setState(() {
+                  _locationController.text = result.description;
+                });
+              }
+            },
             validator: (locationSqft) {
               if (locationSqft.isEmpty) {
                 return "VALUE CANNOT BE EMPTY";
@@ -53,13 +69,15 @@ class _HomePageState extends State<HomePage> {
               labelText: "Location",
               labelStyle: TextStyle(color: Colors.white),
               focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 1, style: BorderStyle.solid)),
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: BorderSide(
+                    color: Colors.white, width: 1, style: BorderStyle.solid),
+              ),
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                  borderSide: BorderSide(
-                      color: Colors.black, width: 1, style: BorderStyle.solid)),
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: BorderSide(
+                    color: Colors.black, width: 1, style: BorderStyle.solid),
+              ),
             ),
           ),
           Padding(
@@ -188,8 +206,6 @@ class _HomePageState extends State<HomePage> {
           // send request button
 
           ElevatedButton(
-            // ignore: sdk_version_set_literal
-
             child: Text(
               "send request",
               style: TextStyle(
@@ -198,14 +214,20 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             onPressed: () {
-              FetchHouse();
-              //navigate to the map page
-              Navigator.push(
+              print("im in");
+              FetchHouse()
+                  .getHousePrice()
+                  .then((value) => {Common().showToast(context, value)});
+
+              if (value != "Error") {
+                // navigate to the map page
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => FlutterAnimarkerExample()));
+                      builder: (context) => FlutterAnimarkerExample()),
+                );
+              }
             },
-
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
                 padding: MaterialStateProperty.all(EdgeInsets.all(10)),
@@ -286,32 +308,34 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
-                child: Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.65,
-                    child: inputs,
-                    decoration: BoxDecoration(
-                        color: Colors.black38,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.greenAccent[100],
-                              offset: Offset(4.5, 5.5),
-                              spreadRadius: 1,
-                              blurRadius: 5)
-                        ]),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+                  child: Center(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.65,
+                      child: inputs,
+                      decoration: BoxDecoration(
+                          color: Colors.black38,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.greenAccent[100],
+                                offset: Offset(4.5, 5.5),
+                                spreadRadius: 1,
+                                blurRadius: 5)
+                          ]),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
