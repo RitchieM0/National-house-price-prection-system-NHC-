@@ -1,6 +1,8 @@
-class Constant{
+class Constants{
 
   static String googleeApiKey = "AIzaSyDRBpXgo5EQ0t0gVNC6NgftgBNcgALyaHw";
+  static const double padding =20;
+  static const double avatarRadius =45;
 }
 
 

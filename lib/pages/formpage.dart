@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:fyp_project/widgets/formWidget.dart';
 import 'package:homepricepredictor/widgets/formWidget.dart';

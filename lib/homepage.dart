@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:homepricepredictor/Utils/common.dart';
 import 'package:homepricepredictor/Utils/constants.dart';
 import 'package:homepricepredictor/services/google_places.dart';
+import 'package:homepricepredictor/widgets/custom_dialog.dart';
 import 'package:homepricepredictor/widgets/locationsearch.dart';
 import 'package:homepricepredictor/widgets/map_routes.dart';
 import 'package:provider/src/provider.dart';
@@ -32,120 +33,98 @@ class _HomePageState extends State<HomePage> {
 
   bool value = false;
   int val = -1;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    
     final inputs = Padding(
       padding: EdgeInsets.only(left: 5, right: 5),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 25,
-          ),
-          TextFormField(
-            controller: _locationController,
-            onTap: () async {
-              final sessionToken = Uuid().v4();
-              final Suggestion result = await showSearch(
-                context: context,
-                delegate: LocationSearch(sessionToken),
-              );
-
-              if (result != null) {
-                setState(() {
-                  _locationController.text = result.description;
-                });
-              }
-            },
-            validator: (locationSqft) {
-              if (locationSqft.isEmpty) {
-                return "VALUE CANNOT BE EMPTY";
-              }
-
-              return null;
-            },
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(15),
-              labelText: "Location",
-              labelStyle: TextStyle(color: Colors.white),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
-                borderSide: BorderSide(
-                    color: Colors.white, width: 1, style: BorderStyle.solid),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
-                borderSide: BorderSide(
-                    color: Colors.black, width: 1, style: BorderStyle.solid),
-              ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 25,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 15),
-            child: TextFormField(
-              controller: valid,
-              keyboardType: TextInputType.number,
-              validator: (roomNum) {
-                if (roomNum.isEmpty) {
+            TextFormField(
+              controller: _locationController,
+              onTap: () async {
+                final sessionToken = Uuid().v4();
+                final Suggestion result = await showSearch(
+                  context: context,
+                  delegate: LocationSearch(sessionToken),
+                );
+
+                if (result != null) {
+                  setState(() {
+                    _locationController.text = result.description;
+                  });
+                }
+              },
+              validator: (locationSqft) {
+                if (locationSqft.isEmpty) {
                   return "VALUE CANNOT BE EMPTY";
                 }
-                if (roomNum.contains(".")) {
-                  return "NUMBER OF ROOM CANNOT BE IN DECIMAL";
-                }
-                if (int.parse(roomNum) < 0 || int.parse(roomNum) > 5) {
-                  return "NO. OF ROOM CANNOT BE LESS THAN 0 OR GREATER THAN 5";
-                }
+
                 return null;
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15),
-                labelText: "Number of rooms",
+                labelText: "Location",
                 labelStyle: TextStyle(color: Colors.white),
                 focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 1,
-                        style: BorderStyle.solid)),
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: BorderSide(
+                      color: Colors.white, width: 1, style: BorderStyle.solid),
+                ),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 1,
-                        style: BorderStyle.solid)),
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: BorderSide(
+                      color: Colors.black, width: 1, style: BorderStyle.solid),
+                ),
               ),
             ),
-          ),
-          TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(15),
-              labelText: "Area",
-              labelStyle: TextStyle(color: Colors.white),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 1, style: BorderStyle.solid)),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  borderSide: BorderSide(
-                      color: Colors.black, width: 1, style: BorderStyle.solid)),
+            Padding(
+              padding: const EdgeInsets.only(top: 15, bottom: 15),
+              child: TextFormField(
+                controller: valid,
+                keyboardType: TextInputType.number,
+                validator: (roomNum) {
+                  if (roomNum.isEmpty) {
+                    return "VALUE CANNOT BE EMPTY";
+                  }
+                  if (roomNum.contains(".")) {
+                    return "NUMBER OF ROOM CANNOT BE IN DECIMAL";
+                  }
+                  if (int.parse(roomNum) < 0 || int.parse(roomNum) > 5) {
+                    return "NO. OF ROOM CANNOT BE LESS THAN 0 OR GREATER THAN 5";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(15),
+                  labelText: "Number of rooms",
+                  labelStyle: TextStyle(color: Colors.white),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                          style: BorderStyle.solid)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 1,
+                          style: BorderStyle.solid)),
+                ),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 15),
-            child: TextFormField(
+            TextFormField(
               keyboardType: TextInputType.number,
-              validator: (totalSqft) {
-                if (totalSqft.isEmpty) {
-                  return "VALUE CANNOT BE EMPTY";
-                }
-
-                return null;
-              },
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(10),
-                labelText: "Metric",
+                contentPadding: EdgeInsets.all(15),
+                labelText: "Area",
                 labelStyle: TextStyle(color: Colors.white),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -161,81 +140,158 @@ class _HomePageState extends State<HomePage> {
                         style: BorderStyle.solid)),
               ),
             ),
-          ),
-          Text(
-            'HOUSE TYPE',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              color: Color.fromRGBO(25, 0, 0, 1),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Container(
-            child: Column(
-              children: [
-                ListTile(
-                  title: Text("Apartment"),
-                  leading: Radio(
-                    value: 1,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Colors.green,
-                  ),
-                ),
-                ListTile(
-                  title: Text("Normal"),
-                  leading: Radio(
-                    value: 2,
-                    groupValue: val,
-                    onChanged: (value) {
-                      setState(() {
-                        val = value;
-                      });
-                    },
-                    activeColor: Colors.green,
-                  ),
-                ),
-              ],
-            ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15, bottom: 15),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                validator: (totalSqft) {
+                  if (totalSqft.isEmpty) {
+                    return "VALUE CANNOT BE EMPTY";
+                  }
 
-          // send request button
-
-          ElevatedButton(
-            child: Text(
-              "send request",
+                  return null;
+                },
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  labelText: "Metric",
+                  labelStyle: TextStyle(color: Colors.white),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                          style: BorderStyle.solid)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 1,
+                          style: BorderStyle.solid)),
+                ),
+              ),
+            ),
+            Text(
+              'HOUSE TYPE',
+              textAlign: TextAlign.left,
               style: TextStyle(
-                color: Colors.cyanAccent,
+                color: Color.fromRGBO(25, 0, 0, 1),
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onPressed: () {
-              print("im in");
-              FetchHouse()
-                  .getHousePrice()
-                  .then((value) => {Common().showToast(context, value)});
+            Container(
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text("Apartment"),
+                    leading: Radio(
+                      value: 1,
+                      groupValue: val,
+                      onChanged: (value) {
+                        setState(() {
+                          val = value;
+                        });
+                      },
+                      activeColor: Colors.green,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text("Normal"),
+                    leading: Radio(
+                      value: 2,
+                      groupValue: val,
+                      onChanged: (value) {
+                        setState(() {
+                          val = value;
+                        });
+                      },
+                      activeColor: Colors.green,
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
-              if (value != "Error") {
-                // navigate to the map page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => FlutterAnimarkerExample()),
-                );
-              }
-            },
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
-                padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                textStyle: MaterialStateProperty.all(
-                  TextStyle(fontSize: 20),
-                )),
-          ),
-        ],
+            // send request button
+
+            ElevatedButton(
+              child: Text(
+                "send request",
+                style: TextStyle(
+                  color: Colors.cyanAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                
+                FetchHouse()
+                    .getHousePrice()
+                    .then((value) => {
+                      Common().showToast(context, value)
+                    });
+
+                    if (value != "Error") {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CustomDialogBox(
+                          title: "House Price",
+                          descriptions: value.toString(),
+                          text: "Ok",
+                        );
+                      });
+                  // navigate to the map page
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => FlutterAnimarkerExample()),
+                  // );
+                }
+              },
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                  padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                  textStyle: MaterialStateProperty.all(
+                    TextStyle(fontSize: 20),
+                  )),
+            ),
+
+            //my own
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.blue),
+              onPressed: () {
+                setState(() {
+                  isLoading = true;
+                });
+
+                // we had used future delayed to stop loading after
+                // 3 seconds and show text "submit" on the screen.
+                Future.delayed(const Duration(seconds: 3), () {
+                  setState(() {
+                    isLoading = false;
+                  });
+                  print(isLoading);
+                });
+              },
+              child: isLoading
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Loading...',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ],
+                    )
+                  : const Text('Submit'),
+            )
+          ],
+        ),
       ),
     );
 

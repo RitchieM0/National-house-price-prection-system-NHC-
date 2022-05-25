@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:homepricepredictor/Utils/common.dart';
 import 'package:homepricepredictor/Utils/constants.dart';
 import 'package:http/http.dart';
 
@@ -23,7 +22,7 @@ class PlaceApiProvider {
 
   final sessionToken;
 
-  static final String apiKey = Constant.googleeApiKey;
+  static final String apiKey = Constants.googleeApiKey;
 
   Future<List<Suggestion>> fetchSuggestions(String input, String lang) async {
 
