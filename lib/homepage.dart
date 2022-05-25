@@ -226,11 +226,8 @@ class _HomePageState extends State<HomePage> {
                 FetchHouse()
                     .getHousePrice()
                     .then((value) => {
-                      Common().showToast(context, value)
-                    });
-
-                    if (value != "Error") {
-                  showDialog(
+                      Common().showToast(context, value),
+                      showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return CustomDialogBox(
@@ -238,7 +235,12 @@ class _HomePageState extends State<HomePage> {
                           descriptions: value.toString(),
                           text: "Ok",
                         );
-                      });
+                      })
+                      
+                    });
+
+                    if (value != "Error") {
+                  
                   // navigate to the map page
                   // Navigator.push(
                   //   context,
